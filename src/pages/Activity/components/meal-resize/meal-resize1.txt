@@ -1,0 +1,164 @@
+import React, { useContext, useEffect, useState } from "react";
+import {
+  CaretDoubleRight,
+  LineVertical,
+  CaretUp,
+  CaretDown,
+  DotsThree,
+} from "@phosphor-icons/react";
+import axios from "axios";
+// Contexts
+import { ActivityUserClickTracingContext } from "../../contexts/ActivityUserClickTracing";
+import { Activity_PinnedItemSelectedOptionsContext } from "../../contexts/Activity_PinnedItemSelectedOptions";
+import { PinnedActivityTabResizeContext } from "../../contexts/PinnedActivityTabResizeItem";
+import UserActivity from "./components/UserActivity/UserActivity";
+
+const ActivityResizeItemComputed = ({
+  handleResizeClose,
+  pinnedResizeItemName,
+}) => {
+  const { activityPinnedItemOptions } = useContext(
+    Activity_PinnedItemSelectedOptionsContext
+  );
+  const { activitySelected, collectiveId } = useContext(
+    ActivityUserClickTracingContext
+  );
+
+  const [resizeData, setResizeData] = useState([]);
+
+  useEffect(() => {
+    // Fetch options data
+    const getOptionsData = async (aid, collectiveId, option) => {
+      let optionName = option.name;
+      let flag = option.flag;
+      let response1 = null;
+      let response2 = null;
+
+      try {
+        const [res1, res2] = await Promise.all([
+          axios.get(
+            `https://meseer.com/dog/generic/get-it/ab12c/${aid}/${collectiveId}`
+          ),
+          axios.get(`https://meseer.com/dog/generic/templates/${aid}`),
+        ]);
+        response1 = res1.data;
+        response2 = res2.data;
+      } catch (err) {
+        console.error(`Error fetching data for aid: ${aid}`, err);
+      }
+
+      // try {
+      //   response1 = await axios.get(
+      //     `https://meseer.com/dog/generic/get-it/ab12c/${aid}/${collectiveId}`
+      //   ).data;
+      // } catch (err) {
+      //   console.error(`Something went wrong with response1`, err);
+      //   response1 = [];
+      // }
+
+      // try {
+      //   response2 = await axios.get(
+      //     `https://meseer.com/dog/generic/templates/${aid}`
+      //   ).data;
+      // } catch (err) {
+      //   console.error(`Something went wrong with response2`, err);
+      // }
+
+      // if response is array but it is empty
+
+      if (!Array.isArray(response1)) {
+        // Check if response1 is neither null nor undefined
+        if (response1 && typeof response1 === "object") {
+          const key = Object.keys(response1);
+          if (key.length > 0) {
+            if (response1[key[0]]) {
+              // Make sure you access the correct property
+              response1 = [{ ...response1[key[0]] }];
+            }
+          } else {
+            response1 = [];
+          }
+        } else {
+          response1 = [];
+        }
+      } else if (Array.isArray(response1) && response1.length === 0) {
+        response1 = [];
+      }
+
+      let templateArray = [];
+      if (!response1 || response1.length === 0) {
+        templateArray.push(response2);
+      }
+
+      return {
+        optionName,
+        at_id: aid,
+        a_id: activitySelected,
+        collectiveId,
+        flag,
+        response: response1 || [],
+        template: response2 || [],
+        templateArray,
+      };
+    };
+
+    // Fetch all activities and update state
+    const fetchActivitiesData = async () => {
+      if (activityPinnedItemOptions && activityPinnedItemOptions.length > 0) {
+        const promises = activityPinnedItemOptions.map(
+          async (activity) =>
+            await getOptionsData(activity.a_id, collectiveId, activity)
+        );
+
+        const results = await Promise.all(promises);
+        setResizeData(results);
+      }
+    };
+
+    fetchActivitiesData();
+  }, []);
+
+  return (
+    <div className="z-50 h-screen w-full md:w-[850px] overflow-auto bg-white absolute right-0 shadow-lg shadow-[#00000066] flex flex-col p-2">
+      <div className="flex justify-between p-2">
+        <div className="flex items-center">
+          <CaretDoubleRight
+            size={20}
+            className="cursor-pointer"
+            onClick={handleResizeClose}
+          />
+          <LineVertical size={20} />
+          <CaretUp size={20} />
+          <CaretDown size={20} />
+        </div>
+        <div>
+          <DotsThree size={20} />
+        </div>
+      </div>
+
+      <div className="flex w-full p-2 mt-8">
+        <div className="w-[120px]">Item</div>
+        <input
+          className="w-full border border-black pl-2 rounded-lg text-xs"
+          value={pinnedResizeItemName}
+          readOnly
+        />
+      </div>
+
+      {resizeData &&
+        resizeData.length > 0 &&
+        resizeData.map((sizeData, index) => {
+          return (
+            <UserActivity
+              data={sizeData}
+              resizeData={resizeData}
+              setResizeData={setResizeData}
+              index={index}
+            />
+          );
+        })}
+    </div>
+  );
+};
+
+export default ActivityResizeItemComputed;

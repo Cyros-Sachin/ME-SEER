@@ -1,0 +1,35 @@
+.control-tab-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1%;
+  line-height: var(--primary-line-height);
+  cursor: pointer;
+  margin-top: 3%;
+  width: 100%;
+  /* margin-left: 2%; */
+}
+
+.control-tab-container-main {
+  display: flex;
+  padding: 2%;
+  align-items: center;
+  position: relative;
+  /* border: 2px solid red; */
+}
+
+.control-tab-container-main > :first-child {
+  font-family: var(--primary-font-family);
+  font-weight: 400;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  color: grey;
+}
+
+.control-tab-container-main > :last-child {
+  font-family: var(--primary-font-family);
+  font-weight: 600;
+  font-size: var(--primary-font-size);
+  display: flex;
+  align-items: center;
+}

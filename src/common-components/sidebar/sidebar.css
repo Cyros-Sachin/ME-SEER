@@ -1,0 +1,45 @@
+.sidebar-main-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 220px;
+  height: 100%;
+  color: white;
+  overflow-y: auto;
+  color: black;
+  box-shadow: var(--box-shadow-sidebar);
+}
+
+.navigation-menu {
+  margin-top: 10%;
+  margin-left: 2%;
+}
+
+.navigation-seperation {
+  margin-top: 10%;
+  font-family: var(--primary-font-family);
+}
+
+.navigation-heading {
+  margin-left: 5%;
+  font-size: 12px;
+  font-weight: 600;
+  color: #1c1c1c88;
+  letter-spacing: 1px;
+}
+
+
+
+.sidebarScrollbar::-webkit-scrollbar {
+  width: 0px; /* Width of the scrollbar */
+  height: 0px;
+}
+
+.sidebarScrollbar::-webkit-scrollbar-thumb {
+  background: #000000; /* Scrollbar color */
+  border-radius: 10px; /* Rounded corners */
+}
+
+.sidebarScrollbar::-webkit-scrollbar-button{
+  height: 10px;
+}

@@ -1,0 +1,17 @@
+.marquee {
+    animation: scroll 8s linear infinite;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  @keyframes scroll {
+    0% {
+      transform: translateY(100%);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(calc(-100% - 52rem));
+      opacity: 0.5;
+    }
+  }
+  

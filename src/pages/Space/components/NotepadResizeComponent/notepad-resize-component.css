@@ -1,0 +1,112 @@
+.notepad-resize-hashtag-container {
+  margin-left: 3%;
+}
+
+.notepad-resize-header-content {
+  margin-left: 2%;
+  /* margin-top: 2%; */
+  height: 30px;
+  width: 300px;
+  padding-left: 2%;
+  border-radius: 4px;
+  background: rgba(128, 128, 128, 0.193);
+  outline: none;
+  border: none;
+  font-family: var(--primary-font-family);
+  font-size: 20px;
+}
+
+.notepad-resize-sub-component {
+  margin: 0;
+  padding: 0;
+}
+
+.notepad-resize-page-control {
+  display: flex;
+  justify-content: space-between;
+
+  & > div:nth-child(2) {
+    /* border: 2px solid navy; */
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100px;
+    margin-right: 2%;
+
+    & > img {
+      height: 15px;
+      width: 15px;
+    }
+  }
+}
+
+.notepad-resize-todo-title {
+  /* border: 2px solid yellow; */
+  height: 30px;
+  width: 150px;
+  align-items: center;
+  font-family: var(--primary-font-family);
+  display: flex;
+  font-weight: 600;
+  margin-left: 2%;
+}
+
+.notepad-resize-component-items {
+  /* border: 2px solid black; */
+  padding: 0;
+  min-height: 450px;
+  width: 95%;
+  margin-left: 2%;
+
+  & > div {
+    margin: 0;
+    margin-bottom: 2%;
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  & > div:nth-child(1) {
+    margin: 0;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    & div > input {
+      /* border: 2px solid blue; */
+      margin: 0;
+      width: 70%;
+    }
+  }
+}
+
+#resize-component-main {
+  /* border: 2px solid green; */
+  width: 40px;
+  height: 20px;
+
+  & > img {
+    height: 60%;
+    width: 40%;
+  }
+}
+
+.notepad-basic-block {
+  top: 20%;
+  left: 55%;
+  width: 130px;
+  height: 130px;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.notepad-basic-block > div {
+  top: 0;
+  left: 0;
+  position: static;
+}

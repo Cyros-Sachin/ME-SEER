@@ -1,0 +1,25 @@
+.appview-container-main {
+  margin: 0 var(--appview-margin-main);
+  width: calc(100% - var(--appview-margin-main));
+}
+
+/* .appview-container-sub {
+  width: 100%;
+  padding: 10px;
+  min-height: 100vh;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 10px;
+  grid-template-rows: auto;
+} 
+*/
+
+.appview-container-sub {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  /* grid-auto-rows: minmax(300px, auto); */
+  grid-auto-rows: minmax(300px, auto);
+  gap: 5px;
+  padding: 10px;
+}

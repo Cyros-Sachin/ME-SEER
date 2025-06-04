@@ -1,0 +1,65 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+:root {
+  --primary-background-color: white;
+  --primary-font-family: "Inter", sans-serif;
+  --primary-font-size: 12px;
+  /* --primary-font-size: 14px; */
+  --box-shadow-sidebar: 2px 2px 2px #00000066;
+  --primary-line-height: 20px;
+}
+
+/*Sidebar*/
+:root {
+  --sidebar-width: 220px;
+  --parent-tab-margin-top: 10%;
+}
+
+:root {
+  --appview-margin-main: 220px;
+}
+
+:root {
+  --small-margin: 2%;
+  --small-padding: 5px;
+}
+
+@keyframes openbox {
+  0% {
+    height: 0px;
+    opacity: 0;
+  }
+  25% {
+    height: 25px;
+    opacity: 0.25;
+  }
+
+  50% {
+    height: 50px;
+    opacity: 0.5;
+  }
+  100% {
+    height: 60px;
+    opacity: 1;
+  }
+}
+
+@keyframes openmenu {
+  0% {
+    height: 0px;
+    opacity: 0;
+  }
+  25% {
+    height: 25px;
+    opacity: 0.25;
+  }
+
+  50% {
+    height: 100px;
+    opacity: 0.5;
+  }
+  100% {
+    height: auto;
+    opacity: 1;
+  }
+}

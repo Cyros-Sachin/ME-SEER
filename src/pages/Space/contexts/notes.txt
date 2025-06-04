@@ -1,0 +1,892 @@
+old code 
+
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { nanoid } from "nanoid";
+import axios from "axios";
+import { UserClickTracingContext } from "../../../common-components/sidebar/contexts/user-click-tracing-context";
+import useUserId from "../../../global-custom-hooks/useUserId";
+import { toast } from "react-toastify";
+import { useLocation } from "react-router-dom";
+
+const TodoContext = createContext();
+
+const TodoProvider = ({ children }) => {
+  const pathname = useLocation().pathname;
+  const userId = useUserId();
+  const [todos, setTodos] = useState([
+    {
+      id: nanoid(),
+      type: "notepad",
+      hastags: ["Fitness", "Jam", "Breakfast", "Dinner", "Lunch"],
+      highlightColors: [
+        "#FFEB3B",
+        "#FFC107",
+        "#FF5722",
+        "#F44336",
+        "#E91E63",
+        "#9C27B0",
+        "#673AB7",
+        "#3F51B5",
+        "#2196F3",
+        "#03A9F4",
+        "#00BCD4",
+        "#009688",
+        "#4CAF50",
+        "#8BC34A",
+        "#CDDC39",
+        "#FFC107",
+        "#FF9800",
+        "#795548",
+        "#9E9E9E",
+        "#607D8B",
+      ],
+      header: "notepad header",
+      sections: [
+        {
+          id: nanoid(),
+          content: "Header 1",
+          type: "header",
+        },
+        {
+          id: nanoid(),
+          content: "Header 1",
+          type: "paragragph",
+        },
+      ],
+    },
+    {
+      id: nanoid(),
+      type: "todo",
+      unchecked: [
+        {
+          id: nanoid(),
+          title: "Eggs",
+          checkbox: false,
+        },
+        {
+          id: nanoid(),
+          title: "Bread",
+          checkbox: false,
+        },
+        {
+          id: nanoid(),
+          title: "Honey",
+          checkbox: false,
+        },
+        {
+          title: "Cheese",
+          checkbox: false,
+        },
+      ],
+
+      checked: [
+        {
+          id: nanoid(),
+          title: "Salmon",
+          checkbox: true,
+        },
+        {
+          id: nanoid(),
+          title: "Chillis",
+          checkbox: true,
+        },
+        {
+          id: nanoid(),
+          title: "Lettuce",
+          checkbox: true,
+        },
+        {
+          id: nanoid(),
+          title: "Chicken",
+          checkbox: true,
+        },
+      ],
+    },
+    {
+      id: nanoid(),
+      type: "notepad",
+      hastags: ["Fitness", "Jam", "Breakfast", "Dinner", "Lunch"],
+      highlightColors: [
+        "#FFEB3B",
+        "#FFC107",
+        "#FF5722",
+        "#F44336",
+        "#E91E63",
+        "#9C27B0",
+        "#673AB7",
+        "#3F51B5",
+        "#2196F3",
+        "#03A9F4",
+        "#00BCD4",
+        "#009688",
+        "#4CAF50",
+        "#8BC34A",
+        "#CDDC39",
+        "#FFC107",
+        "#FF9800",
+        "#795548",
+        "#9E9E9E",
+        "#607D8B",
+      ],
+      header: "notepad header",
+      sections: [
+        {
+          id: nanoid(),
+          content: "Header 1",
+          type: "header",
+        },
+        {
+          id: nanoid(),
+          content: "Header 1",
+          type: "paragragph",
+        },
+
+        {
+          id: nanoid(),
+          content: "Header 1",
+          type: "numbered",
+        },
+      ],
+    },
+    {
+      id: nanoid(),
+      type: "todo",
+      unchecked: [
+        {
+          id: nanoid(),
+          title: "Eggs",
+          checkbox: false,
+        },
+        {
+          id: nanoid(),
+          title: "Bread",
+          checkbox: false,
+        },
+        {
+          id: nanoid(),
+          title: "Honey",
+          checkbox: false,
+        },
+        {
+          id: nanoid(),
+          title: "Cheese",
+          checkbox: false,
+        },
+      ],
+
+      checked: [
+        {
+          id: nanoid(),
+          title: "Salmon",
+          checkbox: true,
+        },
+        {
+          id: nanoid(),
+          title: "Chillis",
+          checkbox: true,
+        },
+        {
+          id: nanoid(),
+          title: "Lettuce",
+          checkbox: true,
+        },
+        {
+          id: nanoid(),
+          title: "Chicken",
+          checkbox: true,
+        },
+      ],
+    },
+    {
+      id: nanoid(),
+      type: "todo",
+      unchecked: [
+        {
+          id: nanoid(),
+          title: "Eggs",
+          checkbox: false,
+        },
+        {
+          id: nanoid(),
+          title: "Bread",
+          checkbox: false,
+        },
+        {
+          id: nanoid(),
+          title: "Honey",
+          checkbox: false,
+        },
+        {
+          id: nanoid(),
+          title: "Cheese",
+          checkbox: false,
+        },
+      ],
+
+      checked: [
+        {
+          id: nanoid(),
+          title: "Salmon",
+          checkbox: true,
+        },
+        {
+          id: nanoid(),
+          title: "Chillis",
+          checkbox: true,
+        },
+        {
+          id: nanoid(),
+          title: "Lettuce",
+          checkbox: true,
+        },
+        {
+          id: nanoid(),
+          title: "Chicken",
+          checkbox: true,
+        },
+      ],
+    },
+    {
+      id: nanoid(),
+      type: "todo",
+      unchecked: [
+        {
+          id: nanoid(),
+          title: "Eggs",
+          checkbox: false,
+        },
+        {
+          id: nanoid(),
+          title: "Bread",
+          checkbox: false,
+        },
+        {
+          id: nanoid(),
+          title: "Honey",
+          checkbox: false,
+        },
+        {
+          id: nanoid(),
+          title: "Cheese",
+          checkbox: false,
+        },
+      ],
+
+      checked: [
+        {
+          id: nanoid(),
+          title: "Salmon",
+          checkbox: true,
+        },
+        {
+          id: nanoid(),
+          title: "Chillis",
+          checkbox: true,
+        },
+        {
+          id: nanoid(),
+          title: "Lettuce",
+          checkbox: true,
+        },
+        {
+          id: nanoid(),
+          title: "Chicken",
+          checkbox: true,
+        },
+      ],
+    },
+    {
+      id: nanoid(),
+      type: "todo",
+      unchecked: [
+        {
+          id: nanoid(),
+          title: "Eggs",
+          checkbox: false,
+        },
+        {
+          id: nanoid(),
+          title: "Bread",
+          checkbox: false,
+        },
+        {
+          id: nanoid(),
+          title: "Honey",
+          checkbox: false,
+        },
+        {
+          id: nanoid(),
+          title: "Cheese",
+          checkbox: false,
+        },
+      ],
+
+      checked: [
+        {
+          id: nanoid(),
+          title: "Salmon",
+          checkbox: true,
+        },
+        {
+          id: nanoid(),
+          title: "Chillis",
+          checkbox: true,
+        },
+        {
+          id: nanoid(),
+          title: "Lettuce",
+          checkbox: true,
+        },
+        {
+          id: nanoid(),
+          title: "Chicken",
+          checkbox: true,
+        },
+      ],
+    },
+    {
+      id: nanoid(),
+      type: "todo",
+      unchecked: [
+        {
+          id: nanoid(),
+          title: "Eggs",
+          checkbox: false,
+        },
+        {
+          id: nanoid(),
+          title: "Bread",
+          checkbox: false,
+        },
+        {
+          id: nanoid(),
+          title: "Honey",
+          checkbox: false,
+        },
+        {
+          id: nanoid(),
+          title: "Cheese",
+          checkbox: false,
+        },
+      ],
+
+      checked: [
+        {
+          id: nanoid(),
+          title: "Salmon",
+          checkbox: true,
+        },
+        {
+          id: nanoid(),
+          title: "Chillis",
+          checkbox: true,
+        },
+        {
+          id: nanoid(),
+          title: "Lettuce",
+          checkbox: true,
+        },
+        {
+          id: nanoid(),
+          title: "Chicken",
+          checkbox: true,
+        },
+      ],
+    },
+    {
+      id: nanoid(),
+      type: "todo",
+      unchecked: [
+        {
+          id: nanoid(),
+          title: "Eggs",
+          checkbox: false,
+        },
+        {
+          id: nanoid(),
+          title: "Bread",
+          checkbox: false,
+        },
+        {
+          id: nanoid(),
+          title: "Honey",
+          checkbox: false,
+        },
+        {
+          id: nanoid(),
+          title: "Cheese",
+          checkbox: false,
+        },
+      ],
+
+      checked: [
+        {
+          id: nanoid(),
+          title: "Salmon",
+          checkbox: true,
+        },
+        {
+          id: nanoid(),
+          title: "Chillis",
+          checkbox: true,
+        },
+        {
+          id: nanoid(),
+          title: "Lettuce",
+          checkbox: true,
+        },
+        {
+          id: nanoid(),
+          title: "Chicken",
+          checkbox: true,
+        },
+      ],
+    },
+    {
+      id: nanoid(),
+      type: "todo",
+      unchecked: [
+        {
+          id: nanoid(),
+          title: "Eggs",
+          checkbox: false,
+        },
+        {
+          id: nanoid(),
+          title: "Bread",
+          checkbox: false,
+        },
+        {
+          id: nanoid(),
+          title: "Honey",
+          checkbox: false,
+        },
+        {
+          id: nanoid(),
+          title: "Cheese",
+          checkbox: false,
+        },
+      ],
+
+      checked: [
+        {
+          id: nanoid(),
+          title: "Salmon",
+          checkbox: true,
+        },
+        {
+          id: nanoid(),
+          title: "Chillis",
+          checkbox: true,
+        },
+        {
+          id: nanoid(),
+          title: "Lettuce",
+          checkbox: true,
+        },
+        {
+          id: nanoid(),
+          title: "Chicken",
+          checkbox: true,
+        },
+      ],
+    },
+    {
+      id: nanoid(),
+      type: "todo",
+      unchecked: [
+        {
+          id: nanoid(),
+          title: "Eggs",
+          checkbox: false,
+        },
+        {
+          id: nanoid(),
+          title: "Bread",
+          checkbox: false,
+        },
+        {
+          id: nanoid(),
+          title: "Honey",
+          checkbox: false,
+        },
+        {
+          id: nanoid(),
+          title: "Cheese",
+          checkbox: false,
+        },
+      ],
+
+      checked: [
+        {
+          id: nanoid(),
+          title: "Salmon",
+          checkbox: true,
+        },
+        {
+          id: nanoid(),
+          title: "Chillis",
+          checkbox: true,
+        },
+        {
+          id: nanoid(),
+          title: "Lettuce",
+          checkbox: true,
+        },
+        {
+          id: nanoid(),
+          title: "Chicken",
+          checkbox: true,
+        },
+      ],
+    },
+  ]);
+
+  const { spaceIdSelected, subSpaceIdSelected, subSpaceClicked } = useContext(
+    UserClickTracingContext
+  );
+
+  // Transform function
+  function transformTodoData(todoData) {
+    return todoData.map((todo) => {
+      // Separate checked and unchecked items
+      const unchecked = todo.contents
+        .filter((item) => !item.checked)
+        .map((item) => ({
+          id: nanoid(),
+          ...item,
+          checkbox: false, // Adding the `checkbox` field based on `checked` value
+        }));
+
+      const checked = todo.contents
+        .filter((item) => item.checked)
+        .map((item) => ({
+          id: nanoid(),
+          ...item,
+          checkbox: true, // Adding the `checkbox` field based on `checked` value
+        }));
+
+      // Return transformed object with additional fields
+      return {
+        id: nanoid(),
+        type: "todo",
+        unchecked,
+        checked,
+        created_date: todo.created_date,
+        last_state: todo.last_state,
+        name: todo.name,
+        refresh_type: todo.refresh_type,
+        space_id: todo.space_id,
+        subspace_id: todo.subspace_id,
+        todo_id: todo.todo_id,
+        user_id: todo.user_id,
+      };
+    });
+  }
+
+  function extractString(s, start) {
+    let string = "";
+    let i = start;
+
+    // Loop until we hit another delimiter
+    while (i < s.length && s[i] !== "<") {
+      string += s[i];
+      i++;
+    }
+
+    return string.trim();
+  }
+
+  function createArrayFromContent(content) {
+    let myNewContent = [];
+    // Match all the tokens like <h>, <bul>, <1>, <2> etc.
+    let delimiters = content.match(/<h>|<num>|<par>|<bul>|<\d+>/g);
+    let currentIndex = 0;
+    let i = 0;
+
+    while (i < delimiters.length) {
+      // Find where the current delimiter appears in the string
+      let delimiterIndex = content.indexOf(delimiters[i], currentIndex);
+
+      // Extract content after the delimiter
+      let extractedContent = extractString(
+        content,
+        delimiterIndex + delimiters[i].length
+      );
+
+      // Create an object with the delimiter and its associated content
+      let newObj = {
+        delim: delimiters[i],
+        content: extractedContent,
+      };
+
+      myNewContent.push(newObj);
+
+      // Move currentIndex forward past this token to avoid repeated matches
+      currentIndex =
+        delimiterIndex + delimiters[i].length + extractedContent.length;
+      i++;
+    }
+
+    return myNewContent;
+  }
+
+  // function transformWordPadData(wordPadData) {
+  //   return wordPadData.map((wordpad) => {
+  //     // Get the last content entry in the contents array
+
+  //     const length = wordpad.contents.length;
+  //     const myWordpad = wordpad.contents[length - 1];
+  //     const newContent = myWordpad.content.trim();
+  //     const wordpadContentId = myWordpad.wc_id;
+
+  //     // Tokenize the content
+  //     const tokenisedContent = createArrayFromContent(newContent);
+
+  //     // Map tokenised content to sections with appropriate types
+  //     const sections = tokenisedContent.map((tokenised) => {
+  //       let type;
+
+  //       switch (tokenised.delim) {
+  //         case "<h>":
+  //           type = "header";
+  //           break;
+  //         case "<bul>":
+  //           type = "bullet";
+  //           break;
+  //         case "<par>":
+  //           type = "paragraph";
+  //           break;
+  //         case "<num>":
+  //           type = "numbered";
+  //           break;
+  //         default:
+  //           type = "paragraph";
+  //       }
+
+  //       return {
+  //         id: nanoid(),
+  //         content: tokenised.content,
+  //         type: type,
+  //       };
+  //     });
+
+  //     return {
+  //       id: nanoid(),
+  //       wordpadContentId: wordpadContentId,
+  //       type: "notepad",
+  //       hastags: ["Fitness", "Jam", "Breakfast", "Dinner", "Lunch"],
+  //       highlightColors: [
+  //         "#FFEB3B",
+  //         "#FFC107",
+  //         "#FF5722",
+  //         "#F44336",
+  //         "#E91E63",
+  //         "#9C27B0",
+  //         "#673AB7",
+  //         "#3F51B5",
+  //         "#2196F3",
+  //         "#03A9F4",
+  //         "#00BCD4",
+  //         "#009688",
+  //         "#4CAF50",
+  //         "#8BC34A",
+  //         "#CDDC39",
+  //         "#FFC107",
+  //         "#FF9800",
+  //         "#795548",
+  //         "#9E9E9E",
+  //         "#607D8B",
+  //       ],
+  //       header: wordpad.name,
+  //       sections: sections,
+  //       ...wordpad,
+  //     };
+  //   });
+  // }
+
+  // New version
+
+  function transformWordPadData(wordPadData) {
+    return wordPadData.map((wordpad) => {
+      // Get the last content entry in the contents array
+
+      const length = wordpad.contents.length;
+      const myWordpad = wordpad.contents[length - 1];
+      const newContent = myWordpad.content.trim();
+      const wordpadContentId = myWordpad.wc_id;
+
+      // Tokenize the content
+      const tokenisedContent = createArrayFromContent(newContent);
+
+      // Map tokenised content to sections with appropriate types
+      const sections = tokenisedContent.map((tokenised) => {
+        let type;
+
+        switch (tokenised.delim) {
+          case "<h>":
+            type = "header";
+            break;
+          case "<bul>":
+            type = "bullet";
+            break;
+          case "<par>":
+            type = "paragraph";
+            break;
+          case "<num>":
+            type = "numbered";
+            break;
+          default:
+            type = "paragraph";
+        }
+
+        return {
+          id: nanoid(),
+          content: tokenised.content,
+          type: type,
+        };
+      });
+
+      return {
+        id: nanoid(),
+        wordpadContentId: wordpadContentId,
+        type: "notepad",
+        hastags: ["Fitness", "Jam", "Breakfast", "Dinner", "Lunch"],
+        highlightColors: [
+          "#FFEB3B",
+          "#FFC107",
+          "#FF5722",
+          "#F44336",
+          "#E91E63",
+          "#9C27B0",
+          "#673AB7",
+          "#3F51B5",
+          "#2196F3",
+          "#03A9F4",
+          "#00BCD4",
+          "#009688",
+          "#4CAF50",
+          "#8BC34A",
+          "#CDDC39",
+          "#FFC107",
+          "#FF9800",
+          "#795548",
+          "#9E9E9E",
+          "#607D8B",
+        ],
+        header: wordpad.name,
+        sections: sections,
+        ...wordpad,
+      };
+    });
+  }
+
+  const fetchTodos = async () => {
+    if (pathname === "/spaces/notes") {
+      try {
+        let fetchedTodos = [];
+        let fetchedWordpad = [];
+
+        // First API call with its own try-catch block
+        // try {
+        //   // const response = await axios.get(
+        //   //   `https://meseer.com/dog/todo-data/${subSpaceClicked}/${userId}`
+        //   // );
+        //   // fetchedTodos = response.data;
+        //   // console.log(fetchedTodos);
+        // } catch (err) {
+        //   // console.log("First API call failed:", err.message);
+        //   fetchedTodos = []; // Set empty array as a fallback
+        // }
+
+        // Second API call with its own try-catch block
+        try {
+          const response = await axios.get(
+            `https://meseer.com/dog/get-todo-wordpad/lastest-version/${userId}/${subSpaceClicked}`
+          );
+          const wordpads = response.data.wordpad_data;
+          const data = wordpads.map((wordpad) => {
+            const object = Object.keys(wordpad)[0];
+            const objectData = wordpad[object];
+            // console.log("The object inside is :", objectData[0]);
+            return objectData[0];
+          });
+
+          fetchedWordpad = transformWordPadData(data);
+          console.log(fetchedWordpad);
+        } catch (err) {
+          // console.log("Second API call failed:", err.message);
+          fetchedWordpad = []; // Set empty array as a fallback
+        }
+
+        let transformedData = transformTodoData(fetchedTodos);
+        let mergedData = transformedData.concat(fetchedWordpad);
+
+        setTodos(mergedData);
+      } catch (err) {
+        console.log("Unexpected error:", err);
+        setTodos([]); // Set empty array as fallback for todos
+      }
+    }
+  };
+
+  // old method already binded
+  // const fetchTodos = async () => {
+  //   if (pathname === "/spaces/notes") {
+  //     try {
+  //       let fetchedTodos = [];
+  //       let fetchedWordpad = [];
+
+  //       // First API call with its own try-catch block
+  //       try {
+  //         const response = await axios.get(
+  //           `https://meseer.com/dog/todo-data/${subSpaceClicked}/${userId}`
+  //         );
+  //         fetchedTodos = response.data;
+  //         console.log(fetchedTodos);
+  //       } catch (err) {
+  //         // console.log("First API call failed:", err.message);
+  //         fetchedTodos = []; // Set empty array as a fallback
+  //       }
+
+  //       // Second API call with its own try-catch block
+  //       try {
+  //         const wordpads = await axios.get(
+  //           `https://meseer.com/dog/wordpad-data/${userId}/${subSpaceClicked}`
+  //         );
+  //         fetchedWordpad = transformWordPadData(wordpads.data);
+
+  //         // old version
+  //         console.log(fetchedWordpad);
+  //       } catch (err) {
+  //         // console.log("Second API call failed:", err.message);
+  //         fetchedWordpad = []; // Set empty array as a fallback
+  //       }
+
+  //       let transformedData = transformTodoData(fetchedTodos);
+  //       let mergedData = transformedData.concat(fetchedWordpad);
+
+  //       setTodos(mergedData);
+  //     } catch (err) {
+  //       console.log("Unexpected error:", err);
+  //       setTodos([]); // Set empty array as fallback for todos
+  //     }
+  //   }
+  // };
+
+  useEffect(() => {
+    // console.log(todos);
+  }, [todos]);
+
+  useEffect(() => {
+    fetchTodos();
+  }, [subSpaceClicked]); // Empty dependency array to run once on mount
+
+  return (
+    <TodoContext.Provider value={{ todos, setTodos }}>
+      {children}
+    </TodoContext.Provider>
+  );
+};
+
+export { TodoContext, TodoProvider };

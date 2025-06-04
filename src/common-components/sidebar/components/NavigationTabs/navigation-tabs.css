@@ -1,0 +1,83 @@
+.navigation-tab-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1%;
+  line-height: var(--primary-line-height);
+  cursor: pointer;
+  margin-left: 2%;
+  /* border: 2px solid red; */
+}
+
+/* .navigation-tab-container :hover {
+  background: rgba(128, 128, 128, 0.136);
+  width: 90%;
+  border-radius: 17px;
+} */
+
+.navigation-tab-container-main {
+  display: flex;
+  padding: 2%;
+  align-items: center;
+  position: relative;
+  /* border: 2px solid green; */
+}
+
+.navigation-tab-arrow-container {
+  display: flex;
+  position: absolute;
+  right: 5%;
+  height: 20px;
+  width: 10%;
+  justify-content: center;
+  align-items: center;
+}
+
+.navigation-tab-arrow-container > img {
+  height: 35%;
+  width: 60%;
+}
+
+.navigation-tab-container-main > img {
+  display: flex;
+  align-items: center;
+  margin-left: 2%;
+  height: 100%;
+  width: 8%;
+}
+
+.navigation-tab-container-main > div {
+  margin-left: 3%;
+  font-family: var(--primary-font-family);
+  font-weight: 600;
+  font-size: var(--primary-font-size);
+  display: flex;
+  align-items: center;
+}
+
+.navigation-tab-submenu-container {
+  /* border: 2px solid green; */
+  width: 70%;
+  margin-left: 5%;
+  padding: 2%;
+  font-family: var(--primary-font-family);
+  overflow: hidden;
+  opacity: 1;
+  /* border: 2px solid rebeccapurple; */
+  transition: opacity 0.5s ease-in-out;
+  animation: openmenu 0.5s ease-in forwards;
+}
+
+
+.scrollbar::-webkit-scrollbar {
+  width: 5px; /* Width of the scrollbar */
+  height: 0px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #000000; /* Scrollbar color */
+  border-radius: 10px; /* Rounded corners */
+}
+
+.scrollbar::-webkit-scrollbar-button{
+  height: 10px;
+}

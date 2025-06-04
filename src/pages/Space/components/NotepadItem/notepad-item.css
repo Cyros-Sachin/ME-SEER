@@ -1,0 +1,74 @@
+  .notepad-item-container-main {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5%;
+}
+
+.notepad-item-container {
+  width: 85%;
+  transition: background-color 0.3s ease; /* Smooth background-color transition on hover */
+  position: relative;
+  display: flex;
+}
+
+.notepad-item-controllers-container {
+  width: 15%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: opacity 0.3s ease; /* Smooth transition for the controllers' visibility */
+  opacity: 1;
+}
+
+.notepad-item-controllers-container > img {
+  height: 12px;
+  width: 50%;
+}
+
+.notepad-item-image {
+  cursor: pointer;
+}
+
+/* New addition to hide controllers when not hovering */
+.notepad-item-container-main:not(:hover) .notepad-item-controllers-container {
+  opacity: 0; /* Controllers will fade out when not hovering */
+}
+
+.notepad-item-container-input {
+  width: 90%;
+  outline: none;
+  border: none;
+  font-family: var(--primary-font-family);
+  /* margin-left: 2%; */
+  padding-left: 2%;
+}
+
+.basic-block-head {
+  position: absolute;
+  bottom: 100%;
+  left: 100%;
+}
+
+.notepad-item-container-display-data {
+  /* border: 2px solid red; */
+}
+
+.renderedList-container-main {
+  font-family: var(--primary-font-family);
+  font-size: 14px;
+}
+
+.dot-container-main {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1%;
+}
+
+.dot-container-main > img {
+  height: 100%;
+  width: 100%;
+}

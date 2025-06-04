@@ -1,0 +1,144 @@
+.notepad-container {
+  width: 200px;
+  height: 30px;
+  border-radius: 10px 10px 0px 00px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-right: 2px solid black;
+  margin: 2%;
+  justify-self: center;
+}
+
+.notepad-component-content {
+  width: 95%;
+  min-height: 98%;
+  border-top: 2px solid rgb(0, 0, 0);
+  display: flex;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  cursor: text;
+}
+
+.notepad-component-items {
+  overflow-y: auto;
+  width: 100%;
+  height: 85%;
+  padding: 2%;
+  display: flex;
+  flex-direction: column;
+}
+
+.notepad-header-content {
+  outline: none;
+  border: none;
+  background: rgba(143, 143, 143, 0.247);
+  width: 70%;
+  height: 20px;
+  border-radius: 4px;
+  margin-left: 2%;
+  padding-left: 2%;
+  font-size: 10px;
+}
+
+.todo-setting-tab {
+  height: 20px;
+  width: 20px;
+  display: flex;
+  border-radius: 50%;
+  /* border: 2px solid red; */
+}
+
+.delete-todo-cross {
+  position: absolute;
+  right: -10%;
+  top: -60%;
+  border-radius: 50%;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.241);
+  height: 20px;
+  width: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 8px;
+  font-family: var(--primary-font-family);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* .hashtag-container {
+  width: 95%;
+  height: 15%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  border-radius: 0px 0px 7px 7px;
+  font-family: var(--primary-font-family);
+  padding: 2%;
+  overflow-y: auto;
+  display: flex;
+  font-size: 12px;
+  background: rgba(63, 63, 63, 0.178);
+
+
+}
+
+*/
+
+.hashtag-container::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
+.hashtag-container {
+  width: 95%;
+  height: 15%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  border-radius: 0px 0px 7px 7px;
+  font-family: var(--primary-font-family);
+  padding: 2%;
+  overflow: auto; /* Adjusted to allow scrolling */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+  gap: 2px; /* Adjust as needed for spacing between items */
+  font-size: 12px;
+  background: rgba(225, 225, 225, 0.579);
+}
+
+.hashtag-item {
+  border-radius: 4px;
+  padding: 2%;
+  min-width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 500;
+  height: 25px;
+  color: white;
+}
+
+
+.scroll-container::-webkit-scrollbar {
+  width: 5px;
+  
+}
+
+.scroll-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background: #000000;
+  border-radius: 14px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.scroll-container::-webkit-scrollbar-button {
+  height: 5px;
+}

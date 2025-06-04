@@ -1,0 +1,66 @@
+.todo-item-container {
+  display: flex;
+  margin: 3%;
+  align-items: center;
+  height: 20px;
+  font-weight: 500;
+}
+
+.todo-item-option-handlers {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 8px;
+  margin-left: 2%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.checkbox-controller {
+  display: flex;
+  align-items: center;
+  margin-left: 2%;
+  height: 100%;
+}
+
+.checkbox-controller > input {
+  background: black;
+  height: 100%;
+  width: 100%;
+  border: 2px solid black;
+  accent-color: #000000;
+}
+
+.todo-name {
+  margin-left: 3%;
+  font-family: var(--primary-font-family);
+  font-size: var(--primary-font-size);
+}
+
+.todo-item-input {
+  width: 100%;
+  background: rgba(128, 128, 128, 0.136);
+  outline: none;
+  border: none;
+  padding: 5px;
+  border-radius: 4px;
+  margin-left: 10px;
+}
+
+.todo-name {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+.delete-icon {
+  color: rgb(54, 54, 54);
+  font-size: 20px;
+  cursor: pointer;
+  margin-left: 10px;
+  position: absolute;
+  right: 0;
+}

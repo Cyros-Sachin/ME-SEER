@@ -1,0 +1,5 @@
+.submenu-container {
+  display: flex;
+  animation: openbox 0.2s ease-in forwardsx;
+  /* border: 2px solid green; */
+}

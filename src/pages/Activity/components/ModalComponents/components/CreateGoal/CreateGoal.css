@@ -1,0 +1,60 @@
+/* Calendar input box */
+.calendar-input {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    width: 100%;
+    transition: border-color 0.3s ease;
+  }
+  
+  .calendar-input:focus {
+    border-color: #3b82f6;
+    outline: none;
+  }
+  
+  /* Datepicker panel */
+  .p-datepicker {
+    font-size: 0.85rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    padding: 0.5rem;
+  }
+  
+  /* Header of the calendar */
+  .p-datepicker .p-datepicker-header {
+    background-color: #f3f4f6;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 0.5rem;
+    border-top-left-radius: 0.75rem;
+    border-top-right-radius: 0.75rem;
+  }
+  
+  /* Calendar day cells */
+  .p-datepicker td > span {
+    padding: 0.5rem;
+    border-radius: 9999px;
+    transition: all 0.2s ease;
+  }
+  
+  .p-datepicker td > span:hover {
+    background-color: #e0f2fe;
+    cursor: pointer;
+  }
+  
+  .p-datepicker td.p-datepicker-today > span {
+    background-color: #3b82f6;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .p-datepicker td.p-datepicker-today > span:hover {
+    background-color: #2563eb;
+  }
+  
+  .p-datepicker td.p-highlight > span {
+    background-color: #2563eb;
+    color: white;
+  }
+  

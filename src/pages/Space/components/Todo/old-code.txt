@@ -1,0 +1,213 @@
+import React, { useEffect, useState } from "react";
+import "./todo-component.css";
+import axios from "axios";
+
+// Controllers
+import componentControllers from "./component-controllers/index";
+import eventController from "./event-controllers/index";
+import assetControllers from "./asset-controllers/index";
+import contextController from "./context-controller";
+import { useContext } from "react";
+import useUserId from "../../../../global-custom-hooks/useUserId";
+
+const TodoComponent = ({ details, todoIndex, handleResize, id }) => {
+  const { todos, setTodos } = useContext(contextController.TodoContext);
+  const { subSpaceClicked } = useContext(
+    contextController.UserClickTracingContext
+  );
+
+  const [isOpen, setIsOpen] = useState(true);
+  const [isUrgent, setIsUrgent] = useState(todos[todoIndex].urgent);
+  const [isImportant, setIsImportant] = useState(todos[todoIndex].important);
+
+  const userId = useUserId();
+
+  // Define indexes for unchecked and checked
+  const indexes = ["unchecked", "checked", "history"];
+  const [index, setIndex] = useState(0); // Start with unchecked by default
+  const [selectedPart, setSelectedPart] = useState(indexes[index]);
+
+  // Display content for perfect view
+  const [content, setContent] = useState([]);
+  const [todoDetails, setTodoDetails] = useState([]);
+
+  // Initial setup of content based on the provided data
+  useEffect(() => {
+    setContent(details);
+    setTodoDetails(details[indexes[index]]);
+  }, [details, index]);
+
+  useEffect(() => {
+    const fetchHistory = async () => {
+      try {
+        if (!todos[todoIndex]) {
+          console.error(`Todo at index ${todoIndex} is undefined.`);
+          return;
+        }
+
+        const fetchedTodosHistory = await eventController.fetchTodoHistory(
+          userId,
+          subSpaceClicked,
+          setTodoDetails,
+          todos[todoIndex].todo_id
+        );
+
+        if (!todos[todoIndex].history) {
+          todos[todoIndex].history = [];
+        }
+
+        todos[todoIndex].history = fetchedTodosHistory;
+        setTodos([...todos]);
+      } catch (error) {
+        console.error("Error fetching history:", error);
+      }
+    };
+
+    if (selectedPart === "history" && todos[todoIndex]) {
+      fetchHistory();
+    }
+  }, [selectedPart]);
+
+  return (
+    <div
+      className={`${
+        !isOpen ? `h-12` : `h-96`
+      } shadow-md mt-2 mb-2 rounded rounded-tl-lg rounded-tr-md rounded-br-lg border-b-2 items-center justify-between border-b-black border-r-2 border-r-black  w-5/6 flex flex-col`}
+    >
+      <div className="bg-[#b7b7b72b] text-black flex items-center rounded-sm absolute -top-2 text-xs left-6 w-[35%] h-[6%] border-t border-r border-l border-black p-2">
+        <img
+          src={assetControllers.notepadAssetController.check}
+          alt="check-fat"
+          className="h-4 mr-1"
+        />
+        <div>{todos[todoIndex].refresh_type}</div>
+        <div>{todos[todoIndex].todo_id}</div>
+      </div>
+      <div className="flex w-full h-12 items-center justify-center ">
+        <div className="text-xs ml-2 items-center justify-center flex flex-col">
+          {/* <div
+            className={`option ${
+              isUrgent ? `text-black font-bold` : "text-[#6c6c6c]"
+            } cursor-pointer`}
+            onClick={() =>
+              eventController.handleUrgentClick(setIsUrgent, isUrgent)
+            }
+          >
+            U
+          </div>
+          <div
+            className={`option ${
+              isImportant ? `text-black font-bold` : "text-[#6c6c6c]"
+            } cursor-pointer`}
+            onClick={() =>
+              eventController.handleImportantClick(setIsImportant, isImportant)
+            }
+          >
+            I
+          </div> */}
+        </div>
+        <div
+          onClick={() => eventController.handleTodoCollapse(isOpen, setIsOpen)}
+          className=""
+        >
+          <img
+            className="w-4"
+            src={isOpen ? assetControllers.uparrow : assetControllers.downarrow}
+            alt="arrow"
+          />
+        </div>
+        <div
+          style={{ fontFamily: "var(--primary-font-family" }}
+          className="font-semibold flex w-full h-12 items-center ml-2 text-xs"
+        >
+          {content.name}
+        </div>
+        <div className="todo-setting">
+          {/* <img src={assetControllers.settings} alt="todo-settings" /> */}
+        </div>
+      </div>
+      {isOpen ? (
+        <div className="w-full h-[90%] flex justify-center rounded-br-md">
+          <div className="w-[95%] h-full border-t-2 border-t-black mb-2 flex flex-col justify-between ">
+            <div className="todo-list-items h-[100%] overflow-auto">
+              {todoDetails && todoDetails.length > 0 ? (
+                todoDetails.map((item, i) => (
+                  <componentControllers.TodoItem
+                    key={i}
+                    itemdetail={item.content}
+                    isUrgent={item.urgent}
+                    isImportant={item.important}
+                    todoIndex={todoIndex}
+                    arrayIndex={i}
+                    checkBox={item.checked} // Reflecting checked status
+                    detail={item}
+                    selectedPart={selectedPart}
+                    todoContent_id={item.tc_id}
+                  />
+                ))
+              ) : (
+                <div className="border w-full mt-2 pl-2 bg-[#000000] text-white font-semibold rounded-md">
+                  {indexes[index]}
+                </div>
+              )}
+            </div>
+
+            <div className="flex justify-end items-center h-[10%] mb-3">
+              <img
+                className="h-4 mr-1 cursor-pointer"
+                src={assetControllers.add}
+                alt="add-item"
+                onClick={() =>
+                  eventController.handleAddTodoListItem(
+                    todoIndex,
+                    todos,
+                    setTodos,
+                    details
+                  )
+                }
+              />
+              <img
+                className="h-4 mr-1 cursor-pointer"
+                onClick={() =>
+                  eventController.handlePagesController(
+                    index - 1,
+                    setIndex,
+                    indexes,
+                    index,
+                    setSelectedPart
+                  )
+                }
+                src={assetControllers.back}
+                alt="back-img"
+              />
+              <img
+                className="h-4 mr-1 cursor-pointer"
+                onClick={() =>
+                  eventController.handlePagesController(
+                    index + 1,
+                    setIndex,
+                    indexes,
+                    index,
+                    setSelectedPart
+                  )
+                }
+                src={assetControllers.forward}
+                alt="forward-img"
+              />
+              <img
+                className="h-3 mr-1 cursor-pointer"
+                src={assetControllers.resize}
+                alt="resize-img"
+                onClick={() => handleResize(todoIndex)}
+              />
+            </div>
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
+    </div>
+  );
+};
+
+export default TodoComponent;
